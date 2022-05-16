@@ -67,56 +67,6 @@ services:
         - '${DLDIR}:/data'
         - './delugevpn/config:/config'
         - '/etc/localtime:/etc/localtime:ro'
-
-  # ----------------------------------------
-  # DOZZLE
-  # ----------------------------------------
-  dozzle:
-    image: amir20/dozzle:latest
-    container_name: doozle
-    restart: unless-stopped
-    network_mode: "bridge"
-    ports:
-        - '${IP_ADDRESS}:9999:8080'
-    volumes:
-        - '/var/run/docker.sock:/var/run/docker.sock'
-
-  # ----------------------------------------
-  # DUPLICATI
-  # ----------------------------------------
-  duplicati:
-    image: lscr.io/linuxserver/duplicati
-    container_name: duplicati
-    restart: unless-stopped
-    network_mode: "bridge"
-    ports:
-        - '${IP_ADDRESS}:8200:8200'
-    environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-    volumes:
-        - './duplicati:/config'
-        - './duplicati/backups:/backups'
-        - '${PWD}:/source'
-        - '/etc/localtime:/etc/localtime:ro'
-
-  # ----------------------------------------
-  # FILEBROWSER
-  # ----------------------------------------
-  filebrowser:
-    image: hurlenko/filebrowser
-    container_name: filebrowser
-    restart: unless-stopped
-    network_mode: "bridge"
-    user: "${PUID}:${PGID}"
-    ports:
-        - '${IP_ADDRESS}:8008:8080'
-    environment:
-        - FB_BASEURL=/filebrowser
-    volumes:
-        - './filebrowser:/config'
-        - '${PWD}:/data/mediabox'
-
   # ----------------------------------------
   # FLARESOLVERR
   # ----------------------------------------
@@ -134,62 +84,6 @@ services:
     volumes:
         - /etc/localtime:/etc/localtime:ro
         - ./flaresolverr:/storage
-
-  # ----------------------------------------
-  # GLANCES
-  # ----------------------------------------
-  glances:
-    image: nicolargo/glances:latest-alpine
-    container_name: glances
-    restart: unless-stopped
-    network_mode: "bridge"
-    pid: host
-    ports:
-        - '${IP_ADDRESS}:61208:61208'
-    environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-        - TZ=${TZ}
-        - GLANCES_OPT=-w
-    volumes:
-        - './glances:/config'
-        - '/var/run/docker.sock:/var/run/docker.sock:ro'
-
-  # ----------------------------------------
-  # HEADPHONES
-  # ----------------------------------------
-  headphones:
-    image: lscr.io/linuxserver/headphones
-    container_name: headphones
-    restart: unless-stopped
-    network_mode: "bridge"
-    ports:
-        - '${IP_ADDRESS}:8282:8181'
-    environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-        - TZ=${TZ}
-    volumes:
-        - './headphones:/config'
-        - '${DLDIR}/completed:/downloads'
-        - '${MUSICDIR}:/music'
-
-  # ----------------------------------------
-  # HOMER
-  # ----------------------------------------
-  homer:
-    image: b4bz/homer:latest
-    container_name: homer
-    restart: unless-stopped
-    network_mode: "bridge"
-    ports:
-        - '${IP_ADDRESS}:80:8080'
-    environment:
-        - UID=${PUID}
-        - GID=${PGID}
-    volumes:
-        - './homer:/www/assets'
-
   # ----------------------------------------
   # JACKETT
   # ----------------------------------------
@@ -430,26 +324,6 @@ services:
         - '${MUSICDIR}:/data/music'
         - '${TVDIR}:/data/tvshows'
         - '/etc/localtime:/etc/localtime:ro'
-
-  # ----------------------------------------
-  # PORTAINER
-  # ----------------------------------------
-  portainer:
-    image: portainer/portainer-ce
-    container_name: portainer
-    restart: unless-stopped
-    network_mode: "bridge"
-    ports:
-        - '${IP_ADDRESS}:9000:9000'
-    environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-    volumes:
-        - './portainer:/data'
-        - '/var/run/docker.sock:/var/run/docker.sock'
-        - '/etc/localtime:/etc/localtime:ro'
-    command: -H unix:///var/run/docker.sock
-
   # ----------------------------------------
   # PROWLARR
   # ----------------------------------------
@@ -502,26 +376,6 @@ services:
         - ${IP_ADDRESS}:4545:4545
     volumes:
         - ./requestrr:/config
-
-  # ----------------------------------------
-  # SICKCHILL
-  # ----------------------------------------
-  sickchill:
-    image: lscr.io/linuxserver/sickchill
-    container_name: sickchill
-    restart: unless-stopped
-    network_mode: "bridge"
-    ports:
-        - '${IP_ADDRESS}:8081:8081'
-    environment:
-        - PUID=${PUID}
-        - PGID=${PGID}
-    volumes:
-        - './sickchill:/config'
-        - '${DLDIR}/completed:/downloads'
-        - '${TVDIR}:/tv'
-        - '/etc/localtime:/etc/localtime:ro'
-
   # ----------------------------------------
   # SONARR
   # ----------------------------------------
@@ -541,25 +395,6 @@ services:
         - '${DLDIR}/completed:/data/completed'
         - '${TVDIR}:/tv'
         - '/etc/localtime:/etc/localtime:ro'
-
-  # ----------------------------------------
-  # SPEEDTEST
-  # ----------------------------------------
-  speedtest:
-    image: henrywhitaker3/speedtest-tracker:dev
-    container_name: speedtest
-    restart: unless-stopped
-    network_mode: "bridge"
-    ports:
-        - '${IP_ADDRESS}:8765:80'
-    environment:
-        - TZ=${TZ}
-        - PGID=${PGID}
-        - PUID=${PUID}
-        - OOKLA_EULA_GDPR=true
-    volumes:
-        - './speedtest:/config'
-
   # ----------------------------------------
   # SQLITEBROWSER
   # ----------------------------------------
