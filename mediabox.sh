@@ -171,12 +171,9 @@ mkdir -p delugevpn
 mkdir -p delugevpn/config/openvpn
 mkdir -p duplicati
 mkdir -p duplicati/backups
-mkdir -p filebrowser
 mkdir -p flaresolverr
-mkdir -p glances
 mkdir -p headphones
 mkdir -p historical/env_files
-mkdir -p homer
 mkdir -p jackett
 mkdir -p jellyfin
 mkdir -p lidarr
@@ -188,13 +185,10 @@ mkdir -p nzbhydra2
 mkdir -p ombi
 mkdir -p overseerr
 mkdir -p "plex/Library/Application Support/Plex Media Server/Logs"
-mkdir -p portainer
 mkdir -p prowlarr
 mkdir -p radarr
 mkdir -p requestrr
-mkdir -p sickchill
 mkdir -p sonarr
-mkdir -p speedtest
 mkdir -p sqlitebrowser
 mkdir -p tautulli
 mkdir -p tdarr
@@ -263,7 +257,7 @@ echo "MUSICDIR=$musicdirectory"
 echo "PIAUNAME=$piauname"
 echo "PIAPASS=$piapass"
 echo "CIDR_ADDRESS=$lannet"
-echo "TZ=$time_zone"
+echo "TZ=America/Los_Angeles"
 echo "PMSTAG=$pmstag"
 echo "PMSTOKEN=$pmstoken"
 echo "VPN_REMOTE=$vpnremote"
