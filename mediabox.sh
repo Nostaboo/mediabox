@@ -182,7 +182,6 @@ mkdir -p nzbget
 mkdir -p nzbhydra2
 mkdir -p ombi
 mkdir -p overseerr
-mkdir -p "plex/Library/Application Support/Plex Media Server/Logs"
 mkdir -p prowlarr
 mkdir -p radarr
 mkdir -p requestrr
@@ -333,21 +332,6 @@ echo "CPDAEMONPASS=$daemonpass"
 echo "NZBGETUN=$daemonun"
 echo "NZBGETPASS=$daemonpass"
 } >> .env
-
-# Configure Homer settings and files
-while [ ! -f homer/config.yml ]; do sleep 1; done
-docker stop homer > /dev/null 2>&1
-cp prep/config.yml homer/config.yml
-cp prep/mediaboxconfig.html homer/mediaboxconfig.html
-cp prep/portmap.html homer/portmap.html
-cp prep/icons/* homer/icons/
-sed '/^PIA/d' < .env > homer/env.txt # Pull PIA creds from the displayed .env file
-perl -i -pe "s/thishost/$thishost/g" homer/config.yml
-perl -i -pe "s/locip/$locip/g" homer/config.yml
-perl -i -pe "s/locip/$locip/g" homer/mediaboxconfig.html
-perl -i -pe "s/daemonun/$daemonun/g" homer/mediaboxconfig.html
-perl -i -pe "s/daemonpass/$daemonpass/g" homer/mediaboxconfig.html
-docker start homer > /dev/null 2>&1
 
 # Configure Muximux settings and files
 while [ ! -f muximux/www/muximux/settings.ini.php-example ]; do sleep 1; done
